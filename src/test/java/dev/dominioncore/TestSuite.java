@@ -30,46 +30,100 @@ import dev.dominioncore.server.PrototypeServerSessionServiceTest;
 import dev.dominioncore.war.FactionWarServiceTest;
 import dev.dominioncore.world.WorldEventServiceTest;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public final class TestSuite {
+    private static PrintWriter reportWriter;
+
     private TestSuite() {
     }
 
     public static void main(String[] args) {
-        run("ScalingFormulaTest", ScalingFormulaTest::runAll);
-        run("AchievementServiceTest", AchievementServiceTest::runAll);
-        run("PrototypeCommandsTest", PrototypeCommandsTest::runAll);
-        run("PrototypeClientSessionTest", PrototypeClientSessionTest::runAll);
-        run("PrototypeRemoteServerGatewayTest", PrototypeRemoteServerGatewayTest::runAll);
-        run("PvpScalingServiceTest", PvpScalingServiceTest::runAll);
-        run("TerritoryCombatServiceTest", TerritoryCombatServiceTest::runAll);
-        run("RuntimeConfigLoaderTest", RuntimeConfigLoaderTest::runAll);
-        run("DominionAcquisitionServiceTest", DominionAcquisitionServiceTest::runAll);
-        run("DominionOwnershipServiceTest", DominionOwnershipServiceTest::runAll);
-        run("FactionEconomyServiceTest", FactionEconomyServiceTest::runAll);
-        run("FactionRankServiceTest", FactionRankServiceTest::runAll);
-        run("BloodlineFilterTest", BloodlineFilterTest::runAll);
-        run("TreeProgressionRulesTest", TreeProgressionRulesTest::runAll);
-        run("LeaderboardServiceTest", LeaderboardServiceTest::runAll);
-        run("ForgeEventBusHooksStubTest", ForgeEventBusHooksStubTest::runAll);
-        run("ForgeModEntrypointStubTest", ForgeModEntrypointStubTest::runAll);
-        run("ForgeNetworkPacketStubTest", ForgeNetworkPacketStubTest::runAll);
-        run("ForgeReadinessReportTest", ForgeReadinessReportTest::runAll);
-        run("ForgeServerPersistenceHooksStubTest", ForgeServerPersistenceHooksStubTest::runAll);
-        run("PlayerProgressionStoreTest", PlayerProgressionStoreTest::runAll);
-        run("BloodlineProgressionServiceTest", BloodlineProgressionServiceTest::runAll);
-        run("ReligionProgressionServiceTest", ReligionProgressionServiceTest::runAll);
-        run("BalanceCapBehaviorTest", BalanceCapBehaviorTest::runAll);
-        run("DominionRuntimeTest", DominionRuntimeTest::runAll);
-        run("RuntimeStatusReportTest", RuntimeStatusReportTest::runAll);
-        run("PrototypeServerSessionServiceTest", PrototypeServerSessionServiceTest::runAll);
-        run("FactionWarServiceTest", FactionWarServiceTest::runAll);
-        run("WorldEventServiceTest", WorldEventServiceTest::runAll);
-        System.out.println("All tests passed.");
+        try {
+            reportWriter = openReportWriter();
+            log("Writing TestSuite diagnostics to " + Path.of("build", "reports", "testsuite.log").toAbsolutePath());
+
+            run("ScalingFormulaTest", ScalingFormulaTest::runAll);
+            run("AchievementServiceTest", AchievementServiceTest::runAll);
+            run("PrototypeCommandsTest", PrototypeCommandsTest::runAll);
+            run("PrototypeClientSessionTest", PrototypeClientSessionTest::runAll);
+            run("PrototypeRemoteServerGatewayTest", PrototypeRemoteServerGatewayTest::runAll);
+            run("PvpScalingServiceTest", PvpScalingServiceTest::runAll);
+            run("TerritoryCombatServiceTest", TerritoryCombatServiceTest::runAll);
+            run("RuntimeConfigLoaderTest", RuntimeConfigLoaderTest::runAll);
+            run("DominionAcquisitionServiceTest", DominionAcquisitionServiceTest::runAll);
+            run("DominionOwnershipServiceTest", DominionOwnershipServiceTest::runAll);
+            run("FactionEconomyServiceTest", FactionEconomyServiceTest::runAll);
+            run("FactionRankServiceTest", FactionRankServiceTest::runAll);
+            run("BloodlineFilterTest", BloodlineFilterTest::runAll);
+            run("TreeProgressionRulesTest", TreeProgressionRulesTest::runAll);
+            run("LeaderboardServiceTest", LeaderboardServiceTest::runAll);
+            run("ForgeEventBusHooksStubTest", ForgeEventBusHooksStubTest::runAll);
+            run("ForgeModEntrypointStubTest", ForgeModEntrypointStubTest::runAll);
+            run("ForgeNetworkPacketStubTest", ForgeNetworkPacketStubTest::runAll);
+            run("ForgeReadinessReportTest", ForgeReadinessReportTest::runAll);
+            run("ForgeServerPersistenceHooksStubTest", ForgeServerPersistenceHooksStubTest::runAll);
+            run("PlayerProgressionStoreTest", PlayerProgressionStoreTest::runAll);
+            run("BloodlineProgressionServiceTest", BloodlineProgressionServiceTest::runAll);
+            run("ReligionProgressionServiceTest", ReligionProgressionServiceTest::runAll);
+            run("BalanceCapBehaviorTest", BalanceCapBehaviorTest::runAll);
+            run("DominionRuntimeTest", DominionRuntimeTest::runAll);
+            run("RuntimeStatusReportTest", RuntimeStatusReportTest::runAll);
+            run("PrototypeServerSessionServiceTest", PrototypeServerSessionServiceTest::runAll);
+            run("FactionWarServiceTest", FactionWarServiceTest::runAll);
+            run("WorldEventServiceTest", WorldEventServiceTest::runAll);
+            log("All tests passed.");
+        } catch (Throwable t) {
+            log("TEST SUITE FAILED: " + t);
+            log(stackTrace(t));
+            throw t;
+        } finally {
+            if (reportWriter != null) {
+                reportWriter.flush();
+                reportWriter.close();
+            }
+        }
     }
 
     private static void run(String name, Runnable test) {
-        System.out.println("Running " + name + "...");
-        test.run();
-        System.out.println("Passed " + name + ".");
+        log("Running " + name + "...");
+        try {
+            test.run();
+            log("Passed " + name + ".");
+        } catch (Throwable t) {
+            log("FAILED " + name + ": " + t);
+            log(stackTrace(t));
+            throw t;
+        }
+    }
+
+    private static PrintWriter openReportWriter() {
+        try {
+            Path report = Path.of("build", "reports", "testsuite.log");
+            Files.createDirectories(report.getParent());
+            return new PrintWriter(Files.newBufferedWriter(report));
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to open TestSuite report writer", e);
+        }
+    }
+
+    private static void log(String message) {
+        System.out.println(message);
+        if (reportWriter != null) {
+            reportWriter.println(message);
+            reportWriter.flush();
+        }
+    }
+
+    private static String stackTrace(Throwable t) {
+        StringWriter buffer = new StringWriter();
+        PrintWriter writer = new PrintWriter(buffer);
+        t.printStackTrace(writer);
+        writer.flush();
+        return buffer.toString();
     }
 }
