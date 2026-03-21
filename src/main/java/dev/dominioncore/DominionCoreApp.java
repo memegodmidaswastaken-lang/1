@@ -19,6 +19,7 @@ import dev.dominioncore.mod.ModLoaderTarget;
 import dev.dominioncore.progression.PlayerProgression;
 import dev.dominioncore.religion.Religion;
 import dev.dominioncore.runtime.DominionRuntime;
+import dev.dominioncore.server.PrototypeServerSessionService;
 
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
@@ -125,6 +126,13 @@ public final class DominionCoreApp {
         runtime.triggerWorldEvent("WEATHER_SHIFT", "night_court", "Forced crimson storm over territory");
         int worldEvents = runtime.totalWorldEvents();
 
+        PrototypeServerSessionService sessions = new PrototypeServerSessionService(runtime, java.nio.file.Paths.get("runtime", "sessions"));
+        sessions.login("session-player").resources().put("blood", 5);
+        sessions.recordKill("session-player", 30);
+        sessions.saveAll();
+        int activeSessions = sessions.activeCount();
+        sessions.logout("session-player");
+
         String topFaction = runtime.topAuthority(1).isEmpty() ? "none" : runtime.topAuthority(1).get(0).id();
         String topReligion = runtime.topFaith(1).isEmpty() ? "none" : runtime.topFaith(1).get(0).id();
         String topKiller = runtime.topKills(1).isEmpty() ? "none" : runtime.topKills(1).get(0).id();
@@ -168,6 +176,7 @@ public final class DominionCoreApp {
                 + ", topFaction='" + topFaction + "'"
                 + ", topReligion='" + topReligion + "'"
                 + ", topKiller='" + topKiller + "'"
+                + ", activeSessions=" + activeSessions
                 + ", loader='" + runtime.preferredLoader() + "'");
     }
 

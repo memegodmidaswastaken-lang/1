@@ -24,6 +24,7 @@ import dev.dominioncore.religion.ReligionProgressionServiceTest;
 import dev.dominioncore.runtime.BalanceCapBehaviorTest;
 import dev.dominioncore.runtime.DominionRuntimeTest;
 import dev.dominioncore.runtime.RuntimeStatusReportTest;
+import dev.dominioncore.server.PrototypeServerSessionServiceTest;
 import dev.dominioncore.war.FactionWarServiceTest;
 import dev.dominioncore.world.WorldEventServiceTest;
 
@@ -56,6 +57,7 @@ public final class TestSuite {
         BalanceCapBehaviorTest.runAll();
         DominionRuntimeTest.runAll();
         RuntimeStatusReportTest.runAll();
+        PrototypeServerSessionServiceTest.runAll();
         FactionWarServiceTest.runAll();
         WorldEventServiceTest.runAll();
         System.out.println("All tests passed.");
