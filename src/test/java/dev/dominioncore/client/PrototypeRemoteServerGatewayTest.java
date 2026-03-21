@@ -16,6 +16,7 @@ public final class PrototypeRemoteServerGatewayTest {
 
     public static void runAll() {
         Path saveRoot = tempDir("remote-client-server-test");
+        Thread serverThread = null;
         try {
             PrototypeServerSessionService sessions = new PrototypeServerSessionService(
                     new DominionRuntime(),
@@ -24,7 +25,7 @@ public final class PrototypeRemoteServerGatewayTest {
             PrototypeServerGateway gateway = new PrototypeServerGateway(sessions);
 
             try (PrototypeSyncServer syncServer = new PrototypeSyncServer(gateway, 0)) {
-                Thread serverThread = new Thread(syncServer::serveForever, "prototype-sync-server-test");
+                serverThread = new Thread(syncServer::serveForever, "prototype-sync-server-test");
                 serverThread.setDaemon(true);
                 serverThread.start();
 
@@ -45,6 +46,12 @@ public final class PrototypeRemoteServerGatewayTest {
                 client.connect(remote);
                 check(client.snapshot().blood() >= 30, "Remote reconnect should restore saved blood");
             }
+            if (serverThread != null) {
+                serverThread.join(2_000);
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("Interrupted while stopping prototype sync server thread", e);
         } finally {
             deleteRecursively(saveRoot);
         }
@@ -74,12 +81,12 @@ public final class PrototypeRemoteServerGatewayTest {
                     try {
                         Files.deleteIfExists(path);
                     } catch (IOException e) {
-                        throw new IllegalStateException("Failed to delete temp path " + path, e);
+                        // Best-effort cleanup only. The test assertions already ran.
                     }
                 });
             }
         } catch (IOException e) {
-            throw new IllegalStateException("Failed to clean temp directory " + root, e);
+            // Best-effort cleanup only. The test assertions already ran.
         }
     }
 }

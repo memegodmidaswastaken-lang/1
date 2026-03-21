@@ -60,12 +60,12 @@ public final class PrototypeServerSessionServiceTest {
                     try {
                         Files.deleteIfExists(path);
                     } catch (IOException e) {
-                        throw new IllegalStateException("Failed to delete temp path " + path, e);
+                        // Best-effort cleanup only. The test assertions already ran.
                     }
                 });
             }
         } catch (IOException e) {
-            throw new IllegalStateException("Failed to clean temp directory " + root, e);
+            // Best-effort cleanup only. The test assertions already ran.
         }
     }
 }

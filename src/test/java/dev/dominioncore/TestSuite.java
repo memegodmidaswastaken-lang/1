@@ -35,35 +35,41 @@ public final class TestSuite {
     }
 
     public static void main(String[] args) {
-        ScalingFormulaTest.runAll();
-        AchievementServiceTest.runAll();
-        PrototypeCommandsTest.runAll();
-        PrototypeClientSessionTest.runAll();
-        PrototypeRemoteServerGatewayTest.runAll();
-        PvpScalingServiceTest.runAll();
-        TerritoryCombatServiceTest.runAll();
-        RuntimeConfigLoaderTest.runAll();
-        DominionAcquisitionServiceTest.runAll();
-        DominionOwnershipServiceTest.runAll();
-        FactionEconomyServiceTest.runAll();
-        FactionRankServiceTest.runAll();
-        BloodlineFilterTest.runAll();
-        TreeProgressionRulesTest.runAll();
-        LeaderboardServiceTest.runAll();
-        ForgeEventBusHooksStubTest.runAll();
-        ForgeModEntrypointStubTest.runAll();
-        ForgeNetworkPacketStubTest.runAll();
-        ForgeReadinessReportTest.runAll();
-        ForgeServerPersistenceHooksStubTest.runAll();
-        PlayerProgressionStoreTest.runAll();
-        BloodlineProgressionServiceTest.runAll();
-        ReligionProgressionServiceTest.runAll();
-        BalanceCapBehaviorTest.runAll();
-        DominionRuntimeTest.runAll();
-        RuntimeStatusReportTest.runAll();
-        PrototypeServerSessionServiceTest.runAll();
-        FactionWarServiceTest.runAll();
-        WorldEventServiceTest.runAll();
+        run("ScalingFormulaTest", ScalingFormulaTest::runAll);
+        run("AchievementServiceTest", AchievementServiceTest::runAll);
+        run("PrototypeCommandsTest", PrototypeCommandsTest::runAll);
+        run("PrototypeClientSessionTest", PrototypeClientSessionTest::runAll);
+        run("PrototypeRemoteServerGatewayTest", PrototypeRemoteServerGatewayTest::runAll);
+        run("PvpScalingServiceTest", PvpScalingServiceTest::runAll);
+        run("TerritoryCombatServiceTest", TerritoryCombatServiceTest::runAll);
+        run("RuntimeConfigLoaderTest", RuntimeConfigLoaderTest::runAll);
+        run("DominionAcquisitionServiceTest", DominionAcquisitionServiceTest::runAll);
+        run("DominionOwnershipServiceTest", DominionOwnershipServiceTest::runAll);
+        run("FactionEconomyServiceTest", FactionEconomyServiceTest::runAll);
+        run("FactionRankServiceTest", FactionRankServiceTest::runAll);
+        run("BloodlineFilterTest", BloodlineFilterTest::runAll);
+        run("TreeProgressionRulesTest", TreeProgressionRulesTest::runAll);
+        run("LeaderboardServiceTest", LeaderboardServiceTest::runAll);
+        run("ForgeEventBusHooksStubTest", ForgeEventBusHooksStubTest::runAll);
+        run("ForgeModEntrypointStubTest", ForgeModEntrypointStubTest::runAll);
+        run("ForgeNetworkPacketStubTest", ForgeNetworkPacketStubTest::runAll);
+        run("ForgeReadinessReportTest", ForgeReadinessReportTest::runAll);
+        run("ForgeServerPersistenceHooksStubTest", ForgeServerPersistenceHooksStubTest::runAll);
+        run("PlayerProgressionStoreTest", PlayerProgressionStoreTest::runAll);
+        run("BloodlineProgressionServiceTest", BloodlineProgressionServiceTest::runAll);
+        run("ReligionProgressionServiceTest", ReligionProgressionServiceTest::runAll);
+        run("BalanceCapBehaviorTest", BalanceCapBehaviorTest::runAll);
+        run("DominionRuntimeTest", DominionRuntimeTest::runAll);
+        run("RuntimeStatusReportTest", RuntimeStatusReportTest::runAll);
+        run("PrototypeServerSessionServiceTest", PrototypeServerSessionServiceTest::runAll);
+        run("FactionWarServiceTest", FactionWarServiceTest::runAll);
+        run("WorldEventServiceTest", WorldEventServiceTest::runAll);
         System.out.println("All tests passed.");
+    }
+
+    private static void run(String name, Runnable test) {
+        System.out.println("Running " + name + "...");
+        test.run();
+        System.out.println("Passed " + name + ".");
     }
 }
