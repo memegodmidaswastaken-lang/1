@@ -1,0 +1,7 @@
+{
+  "id": "authority",
+  "displayName": "Authority",
+  "type": "LEADERSHIP",
+  "formula": "Members * 2 + Chunks * 3 + Online * 5",
+  "requirement": "Must be faction leader"
+}
