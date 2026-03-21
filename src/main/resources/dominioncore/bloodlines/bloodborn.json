@@ -1,0 +1,27 @@
+{
+  "id": "bloodborn",
+  "displayName": "Bloodborn",
+  "description": "Power rises through combat and survival.",
+  "resource": "blood",
+  "scalingCondition": "gain_blood_on_kill",
+  "passives": [
+    "hematic_regeneration_1"
+  ],
+  "actives": [
+    "blood_surge"
+  ],
+  "tree": {
+    "nodes": [
+      {
+        "id": "blood_surge",
+        "cost": 25,
+        "requires": []
+      },
+      {
+        "id": "hematic_regeneration_1",
+        "cost": 50,
+        "requires": ["blood_surge"]
+      }
+    ]
+  }
+}

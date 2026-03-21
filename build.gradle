@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group = 'dev.dominioncore'
+version = '0.1.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+}
+
+def testRuntimeClasspath = sourceSets.test.runtimeClasspath
+
+tasks.register('runTestSuite', JavaExec) {
+    group = 'verification'
+    description = 'Runs the plain-Java DominionCore test suite.'
+    dependsOn(tasks.testClasses)
+    classpath = testRuntimeClasspath
+    mainClass = 'dev.dominioncore.TestSuite'
+}
+
+tasks.named('test') {
+    // Keep `gradle test` as the main entrypoint while delegating execution to our plain Java suite.
+    dependsOn(tasks.named('runTestSuite'))
+}
+
+tasks.named('check') {
+    dependsOn(tasks.named('runTestSuite'))
+}
