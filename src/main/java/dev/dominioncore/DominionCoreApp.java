@@ -113,6 +113,9 @@ public final class DominionCoreApp {
         String cmd2 = PrototypeCommands.execute(runtime, player, "grantdominion void_lord");
         String cmd3 = PrototypeCommands.execute(runtime, player, "achievements");
         String cmd4 = PrototypeCommands.execute(runtime, player, "forgeready");
+        String cmd5 = PrototypeCommands.execute(runtime, player, "savestate runtime/player-one-command.json");
+        player.resources().put("blood", 1);
+        String cmd6 = PrototypeCommands.execute(runtime, player, "loadstate runtime/player-one-command.json");
 
         java.nio.file.Path savePath = java.nio.file.Paths.get("runtime", "player-one.json");
         runtime.savePlayerProgression(savePath, player);
@@ -154,6 +157,8 @@ public final class DominionCoreApp {
                 + ", cmd2='" + cmd2 + "'"
                 + ", cmd3='" + cmd3 + "'"
                 + ", cmd4='" + cmd4 + "'"
+                + ", cmd5='" + cmd5 + "'"
+                + ", cmd6='" + cmd6 + "'"
                 + ", loadedBlood=" + loaded.resources().getOrDefault("blood", 0)
                 + ", loadedPrimary='" + loaded.primaryDominionId() + "'"
                 + ", maxPowerCap=" + runtime.balanceConfig().maxDominionPower()

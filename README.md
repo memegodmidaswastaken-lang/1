@@ -86,7 +86,7 @@ If your IDE still shows stale errors, refresh Gradle project and invalidate cach
 - Faction economy service now supports tax income ticks, treasury deposit/withdraw, and war upkeep drains.
 - Religion progression now supports follower conversion, blessing tiers, and smite/resurrection unlock checks.
 
-- Prototype command helpers now support quick local actions (`grantblood`, `grantdominion`, `switchdominion`, `status`, `loader`, `forgeready`).
+- Prototype command helpers now support quick local actions (`grantblood`, `grantdominion`, `switchdominion`, `status`, `loader`, `forgeready`, `savestate`, `loadstate`).
 - Runtime status report helper now summarizes player progression/dominion/faith state for diagnostics.
 - Player progression persistence now supports save/load snapshots via `PlayerProgressionStore` for prototype restart continuity.
 - Runtime balance config now supports toggles/caps (dominions enabled, hardcore mode, power caps, PvP cap values) via `RuntimeConfigLoader`.
@@ -97,6 +97,7 @@ If your IDE still shows stale errors, refresh Gradle project and invalidate cach
 - Forge network packet stub now documents unlock/switch/sync packet flow for upcoming multiplayer wiring.
 - Forge server persistence hook stub now documents load/save/logout/stop lifecycle for player progression storage.
 - Forge readiness report now tracks pending integration tasks (entrypoint, event bus hooks, packets, persistence hooks).
+- Prototype commands now support save/load snapshots so local sessions can round-trip progression state quickly.
 - Achievement tracking now unlocks milestone badges for kills, dual-dominion progress, and world-event participation.
 
 

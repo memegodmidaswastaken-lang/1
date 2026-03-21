@@ -4,6 +4,8 @@ import dev.dominioncore.progression.PlayerProgression;
 import dev.dominioncore.runtime.DominionRuntime;
 import dev.dominioncore.runtime.RuntimeStatusReport;
 
+import java.nio.file.Path;
+
 /**
  * Tiny command-style helpers to speed up local prototyping.
  */
@@ -45,7 +47,38 @@ public final class PrototypeCommands {
             case "achievements" -> "OK achievements=" + runtime.achievements(player.playerId());
             case "loader" -> "OK loader=" + runtime.preferredLoader();
             case "forgeready" -> "OK " + runtime.forgeReadinessSummary();
+            case "savestate" -> {
+                Path path = commandPath(parts, 1, player.playerId() + "-command-save.json");
+                runtime.savePlayerProgression(path, player);
+                yield "OK saved=" + path;
+            }
+            case "loadstate" -> {
+                Path path = commandPath(parts, 1, player.playerId() + "-command-save.json");
+                PlayerProgression loaded = runtime.loadPlayerProgression(path);
+                copyProgression(loaded, player);
+                yield "OK loaded=" + path;
+            }
             default -> "ERR unknown command";
         };
+    }
+
+    private static Path commandPath(String[] parts, int index, String defaultName) {
+        if (parts.length > index && !parts[index].isBlank()) {
+            return Path.of(parts[index]);
+        }
+        return Path.of("runtime", defaultName);
+    }
+
+    private static void copyProgression(PlayerProgression source, PlayerProgression target) {
+        target.setActiveBloodlineId(source.activeBloodlineId());
+        target.unlockedNodes().clear();
+        target.unlockedNodes().addAll(source.unlockedNodes());
+        target.resources().clear();
+        target.resources().putAll(source.resources());
+        target.unlockedDominions().clear();
+        target.unlockedDominions().addAll(source.unlockedDominions());
+        target.setPrimaryDominionId(source.primaryDominionId());
+        target.setSecondaryDominionId(source.secondaryDominionId());
+        target.setNextDominionSwitchAtEpoch(source.nextDominionSwitchAtEpoch());
     }
 }
