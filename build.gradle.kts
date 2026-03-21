@@ -23,22 +23,6 @@ tasks.register<JavaExec>("runTestSuite") {
     dependsOn(tasks.testClasses)
     classpath = testRuntimeClasspath
     mainClass.set("dev.dominioncore.TestSuite")
-    isIgnoreExitValue = true
-
-    doLast {
-        val result = executionResult.get()
-        if (result.exitValue != 0) {
-            val report = layout.buildDirectory.file("reports/testsuite.log").get().asFile
-            if (report.exists()) {
-                println("----- DominionCore TestSuite report (${report.absolutePath}) -----")
-                println(report.readText())
-                println("----- end TestSuite report -----")
-            } else {
-                println("TestSuite report file was not created: ${report.absolutePath}")
-            }
-            throw GradleException("TestSuite failed with exit code ${result.exitValue}. See ${report.absolutePath} for the exact failing test and stacktrace.")
-        }
-    }
 }
 
 tasks.register<JavaExec>("runPrototypeServer") {
