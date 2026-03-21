@@ -2,6 +2,7 @@ package dev.dominioncore;
 
 import dev.dominioncore.achievement.AchievementServiceTest;
 import dev.dominioncore.app.PrototypeCommandsTest;
+import dev.dominioncore.client.PrototypeClientSessionTest;
 import dev.dominioncore.combat.PvpScalingServiceTest;
 import dev.dominioncore.combat.TerritoryCombatServiceTest;
 import dev.dominioncore.config.RuntimeConfigLoaderTest;
@@ -36,6 +37,7 @@ public final class TestSuite {
         ScalingFormulaTest.runAll();
         AchievementServiceTest.runAll();
         PrototypeCommandsTest.runAll();
+        PrototypeClientSessionTest.runAll();
         PvpScalingServiceTest.runAll();
         TerritoryCombatServiceTest.runAll();
         RuntimeConfigLoaderTest.runAll();

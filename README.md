@@ -99,6 +99,7 @@ If your IDE still shows stale errors, refresh Gradle project and invalidate cach
 - Forge readiness report now tracks pending integration tasks (entrypoint, event bus hooks, packets, persistence hooks).
 - Prototype commands now support save/load snapshots so local sessions can round-trip progression state quickly.
 - Prototype server session service now supports login/load, logout/save, save-all, and kill routing over persisted player sessions.
+- Prototype client/server simulation now supports connect, sync, blood grant, kill notifications, and reconnect state restoration through lightweight snapshot DTOs.
 - Achievement tracking now unlocks milestone badges for kills, dual-dominion progress, and world-event participation.
 
 
