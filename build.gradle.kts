@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.Test
+
 plugins {
     java
 }
@@ -13,6 +15,15 @@ java {
 
 repositories {
     mavenCentral()
+}
+
+val localGradleLib = gradle.gradleHomeDir!!.resolve("lib")
+
+dependencies {
+    testImplementation(files(
+        localGradleLib.resolve("junit-4.13.2.jar"),
+        localGradleLib.resolve("hamcrest-core-1.3.jar")
+    ))
 }
 
 tasks.register<JavaExec>("runTestSuite") {
@@ -70,8 +81,7 @@ tasks.register<JavaExec>("runDominionCoreApp") {
     mainClass.set("dev.dominioncore.DominionCoreApp")
 }
 
-tasks.named("test") {
-    description = "Delegates test verification to the custom DominionCore TestSuite task."
-    dependsOn(tasks.named("runTestSuite"))
-    enabled = false
+tasks.named<Test>("test") {
+    description = "Runs the JUnit 4 bridge test that executes the custom DominionCore TestSuite."
+    useJUnit()
 }
