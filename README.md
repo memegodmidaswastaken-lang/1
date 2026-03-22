@@ -129,6 +129,8 @@ Quick checks:
 - `gradle test`
 - `javac -d out $(find src/main/java -name '*.java')`
 
+`gradle test` works through a small JUnit 4 bridge test that invokes the custom `dev.dominioncore.TestSuite`, while `gradle runTestSuite` still runs that plain-Java suite directly.
+
 If your IDE still shows stale errors, refresh Gradle project and invalidate caches/restart.
 
 
