@@ -2,6 +2,24 @@
 
 DominionCore is planned as a modular Minecraft progression mod with bloodlines, dominions, factions, religion, PvP scaling, modern GUIs, and scriptable expansion.
 
+## Simpler direction: build on existing mods
+
+Instead of custom-building every system from scratch, DominionCore can work much more simply as an addon layer over proven mods:
+
+- **Origins + Apoli** for bloodlines / origin-style powers.
+- **FTB Teams** for factions, party state, invites, and shared memberships.
+- **KubeJS** for scripted hooks and balance/event glue.
+
+That means DominionCore can focus on:
+
+- dominions and progression glue
+- balance rules
+- UI / presentation
+- cross-mod orchestration
+- save/load and compatibility policies
+
+The new `dev.dominioncore.integration` package documents this simpler integration-first direction in code as well.
+
 ## IntelliJ IDEA setup
 
 1. Install **JDK 21** (Temurin recommended).
