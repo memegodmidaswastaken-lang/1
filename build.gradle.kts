@@ -84,4 +84,8 @@ tasks.register<JavaExec>("runDominionCoreApp") {
 tasks.named<Test>("test") {
     description = "Runs the JUnit 4 bridge test that executes the custom DominionCore TestSuite."
     useJUnit()
+    testClassesDirs = sourceSets.test.get().output.classesDirs
+    classpath = sourceSets.test.get().runtimeClasspath
+    setScanForTestClasses(true)
+    include("**/*Test.class", "**/*Tests.class", "**/*TestCase.class")
 }
