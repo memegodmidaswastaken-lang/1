@@ -2,6 +2,7 @@ package dev.dominioncore;
 
 import dev.dominioncore.achievement.AchievementServiceTest;
 import dev.dominioncore.app.PrototypeCommandsTest;
+import dev.dominioncore.app.PrototypeTryoutTest;
 import dev.dominioncore.client.PrototypeClientSessionTest;
 import dev.dominioncore.client.PrototypeRemoteServerGatewayTest;
 import dev.dominioncore.combat.PvpScalingServiceTest;
@@ -52,6 +53,7 @@ public final class TestSuite {
             run("ScalingFormulaTest", ScalingFormulaTest::runAll);
             run("AchievementServiceTest", AchievementServiceTest::runAll);
             run("PrototypeCommandsTest", PrototypeCommandsTest::runAll);
+            run("PrototypeTryoutTest", PrototypeTryoutTest::runAll);
             run("PrototypeClientSessionTest", PrototypeClientSessionTest::runAll);
             run("PrototypeRemoteServerGatewayTest", PrototypeRemoteServerGatewayTest::runAll);
             run("PvpScalingServiceTest", PvpScalingServiceTest::runAll);
@@ -61,11 +63,11 @@ public final class TestSuite {
             run("DominionOwnershipServiceTest", DominionOwnershipServiceTest::runAll);
             run("FactionEconomyServiceTest", FactionEconomyServiceTest::runAll);
             run("FactionRankServiceTest", FactionRankServiceTest::runAll);
-        run("BloodlineFilterTest", BloodlineFilterTest::runAll);
-        run("TreeProgressionRulesTest", TreeProgressionRulesTest::runAll);
-        run("SimplifiedModIntegrationPlanTest", SimplifiedModIntegrationPlanTest::runAll);
-        run("ConnectorAdapterTest", ConnectorAdapterTest::runAll);
-        run("LeaderboardServiceTest", LeaderboardServiceTest::runAll);
+            run("BloodlineFilterTest", BloodlineFilterTest::runAll);
+            run("TreeProgressionRulesTest", TreeProgressionRulesTest::runAll);
+            run("SimplifiedModIntegrationPlanTest", SimplifiedModIntegrationPlanTest::runAll);
+            run("ConnectorAdapterTest", ConnectorAdapterTest::runAll);
+            run("LeaderboardServiceTest", LeaderboardServiceTest::runAll);
             run("ForgeEventBusHooksStubTest", ForgeEventBusHooksStubTest::runAll);
             run("ForgeModEntrypointStubTest", ForgeModEntrypointStubTest::runAll);
             run("ForgeNetworkPacketStubTest", ForgeNetworkPacketStubTest::runAll);

@@ -36,8 +36,22 @@ The new `dev.dominioncore.integration` package documents this simpler integratio
 2. Open this project in IntelliJ as a **Gradle** project.
 3. Set **Project SDK** and **Gradle JVM** to Java 21.
 4. Run `DominionCoreApp.main()` to execute functional checks and launch the UI when a display is available.
+   - or from the terminal: `gradle runDominionCoreApp`
 
 ## Testing the prototype as a separate server and client
+
+### Fastest way to try it out
+
+If you just want to see the prototype flow work without juggling two terminals, run:
+
+- `gradle runPrototypeTryout`
+
+That command starts a local socket server on an ephemeral port, runs a scripted client flow (`connect`, `grantblood 25`, `kill 40`, `sync`, `disconnect`), and writes the saved player state under `runtime/tryout`.
+
+Useful overrides:
+
+- `gradle runPrototypeTryout -PplayerId=night_tester`
+- `gradle runPrototypeTryout -PsaveRoot=runtime/my-tryout`
 
 You can now run the prototype sync layer as two separate Java processes:
 

@@ -52,6 +52,26 @@ tasks.register<JavaExec>("runPrototypeClient") {
     args(cliArgs)
 }
 
+tasks.register<JavaExec>("runPrototypeTryout") {
+    group = "application"
+    description = "Runs a scripted end-to-end local tryout of the prototype server/client flow."
+    dependsOn(tasks.classes)
+    classpath = sourceSets.main.get().runtimeClasspath
+    mainClass.set("dev.dominioncore.app.PrototypeTryoutMain")
+    args(
+        (findProperty("playerId") ?: "player-one").toString(),
+        (findProperty("saveRoot") ?: "runtime/tryout").toString()
+    )
+}
+
+tasks.register<JavaExec>("runDominionCoreApp") {
+    group = "application"
+    description = "Runs the DominionCore app functional checks and launches the UI when a display is available."
+    dependsOn(tasks.classes)
+    classpath = sourceSets.main.get().runtimeClasspath
+    mainClass.set("dev.dominioncore.DominionCoreApp")
+}
+
 tasks.named("test") {
     dependsOn(tasks.named("runTestSuite"))
 }

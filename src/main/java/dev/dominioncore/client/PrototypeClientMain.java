@@ -1,5 +1,6 @@
 package dev.dominioncore.client;
 
+import dev.dominioncore.app.PrototypeTryout;
 import dev.dominioncore.server.PrototypeServerApi;
 import dev.dominioncore.sync.PlayerStateSnapshot;
 
@@ -93,16 +94,6 @@ public final class PrototypeClientMain {
     }
 
     private static void printSnapshot(PlayerStateSnapshot snapshot) {
-        if (snapshot == null) {
-            System.out.println("No snapshot cached yet. Run connect first.");
-            return;
-        }
-        System.out.println("Snapshot{playerId='" + snapshot.playerId()
-                + "', blood=" + snapshot.blood()
-                + ", activeBloodlineId='" + snapshot.activeBloodlineId()
-                + "', primaryDominionId='" + snapshot.primaryDominionId()
-                + "', secondaryDominionId='" + snapshot.secondaryDominionId()
-                + "', unlockedDominions=" + snapshot.unlockedDominions()
-                + "}");
+        System.out.println(PrototypeTryout.formatSnapshot(snapshot));
     }
 }
