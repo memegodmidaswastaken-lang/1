@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "dominioncore",
+  "version": "0.1.0",
+  "name": "DominionCore",
+  "description": "Compatibility metadata placeholder while DominionCore targets Forge runtime integration first.",
+  "authors": [
+    "DominionCore Team"
+  ],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "environment": "*",
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": ">=1.20"
+  }
+}
