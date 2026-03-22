@@ -73,7 +73,9 @@ tasks.register<JavaExec>("runDominionCoreApp") {
 }
 
 tasks.named("test") {
+    description = "Delegates test verification to the custom DominionCore TestSuite task."
     dependsOn(tasks.named("runTestSuite"))
+    enabled = false
 }
 
 tasks.named("check") {
