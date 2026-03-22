@@ -14,6 +14,7 @@ import dev.dominioncore.economy.FactionEconomyServiceTest;
 import dev.dominioncore.faction.FactionRankServiceTest;
 import dev.dominioncore.gui.logic.BloodlineFilterTest;
 import dev.dominioncore.gui.logic.TreeProgressionRulesTest;
+import dev.dominioncore.integration.ConnectorAdapterTest;
 import dev.dominioncore.integration.SimplifiedModIntegrationPlanTest;
 import dev.dominioncore.leaderboard.LeaderboardServiceTest;
 import dev.dominioncore.mod.ForgeEventBusHooksStubTest;
@@ -63,6 +64,7 @@ public final class TestSuite {
         run("BloodlineFilterTest", BloodlineFilterTest::runAll);
         run("TreeProgressionRulesTest", TreeProgressionRulesTest::runAll);
         run("SimplifiedModIntegrationPlanTest", SimplifiedModIntegrationPlanTest::runAll);
+        run("ConnectorAdapterTest", ConnectorAdapterTest::runAll);
         run("LeaderboardServiceTest", LeaderboardServiceTest::runAll);
             run("ForgeEventBusHooksStubTest", ForgeEventBusHooksStubTest::runAll);
             run("ForgeModEntrypointStubTest", ForgeModEntrypointStubTest::runAll);

@@ -20,6 +20,16 @@ That means DominionCore can focus on:
 
 The new `dev.dominioncore.integration` package documents this simpler integration-first direction in code as well.
 
+### Suggested connector matrix
+
+| DominionCore feature | External mod to build on | DominionCore's job |
+| --- | --- | --- |
+| Bloodlines / starting identities | Origins + Apoli | Map origin choice into DominionCore progression/UI glue |
+| Factions / teams | FTB Teams | Treat teams as factions and consume membership/shared state |
+| Territory / land control | FTB Chunks | Read claims as territory ownership inputs |
+| Scripting / rules glue | KubeJS | Expose hooks and let scripts drive pack-specific logic |
+| Custom layer we still keep | DominionCore | Dominions, balance, UI, progression glue, orchestration |
+
 ## IntelliJ IDEA setup
 
 1. Install **JDK 21** (Temurin recommended).
