@@ -126,6 +126,7 @@ Expected layout:
 
 Quick checks:
 - `./scripts/verify_layout.sh`
+- `gradle test`
 - `javac -d out $(find src/main/java -name '*.java')`
 
 If your IDE still shows stale errors, refresh Gradle project and invalidate caches/restart.

@@ -15,13 +15,11 @@ repositories {
     mavenCentral()
 }
 
-val testRuntimeClasspath = sourceSets.test.get().runtimeClasspath
-
 tasks.register<JavaExec>("runTestSuite") {
     group = "verification"
     description = "Runs the plain-Java DominionCore test suite."
     dependsOn(tasks.testClasses)
-    classpath = testRuntimeClasspath
+    classpath = sourceSets.test.get().output + sourceSets.test.get().runtimeClasspath
     mainClass.set("dev.dominioncore.TestSuite")
 }
 
@@ -76,8 +74,4 @@ tasks.named("test") {
     description = "Delegates test verification to the custom DominionCore TestSuite task."
     dependsOn(tasks.named("runTestSuite"))
     enabled = false
-}
-
-tasks.named("check") {
-    dependsOn(tasks.named("runTestSuite"))
 }
