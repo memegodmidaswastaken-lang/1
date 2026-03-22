@@ -88,4 +88,7 @@ tasks.named<Test>("test") {
     classpath = sourceSets.test.get().runtimeClasspath
     setScanForTestClasses(true)
     include("**/*Test.class", "**/*Tests.class", "**/*TestCase.class")
+    filter {
+        includeTestsMatching("dev.dominioncore.TestSuiteJUnit4Test")
+    }
 }
