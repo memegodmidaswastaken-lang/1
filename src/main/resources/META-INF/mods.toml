@@ -1,0 +1,29 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+license = "All Rights Reserved"
+issueTrackerURL = ""
+displayTest = "IGNORE_ALL_VERSION"
+
+[[mods]]
+modId = "dominioncore"
+version = "0.1.0"
+displayName = "DominionCore"
+description = '''
+DominionCore is a modular progression mod prototype with bloodlines, dominions,
+factions, religion, and scalable system foundations. Primary runtime target: Forge.
+'''
+authors = "DominionCore Team"
+
+[[dependencies.dominioncore]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20,1.21)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.dominioncore]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
